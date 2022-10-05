@@ -1,0 +1,28 @@
+export const trackEVENT_TYPE_NAME = (
+  event: EVENT_TYPE_NAME,
+  context?: SelfDescribingJson<Record<string, unknown>>[] | null
+) => {
+  trackSelfDescribingEvent({
+    event: {
+      schema: EVENT_TYPE_SCHEMA_STRING,
+      data: event,
+    },
+    context,
+  });
+};
+
+/**
+ * Returns a track function which send the given event data together
+ * with all SnowPlow Entities from TrackingContext Context Providers
+ * to SnowPlow
+ *
+ * Please note that SnowPlow Entities with the same schema id
+ * will reduced to the latest Entity.
+ *
+ * @example
+ * ```tsx
+ * const track = useTrackEVENT_TYPE_NAME();
+ * return <button onClick={() => track()}>Click me</button>
+ * ```
+ */
+export const useTrackEVENT_TYPE_NAME = () => useSnowPlowTracking<EVENT_TYPE_NAME>(trackEVENT_TYPE_NAME);

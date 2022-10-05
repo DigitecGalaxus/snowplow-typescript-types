@@ -1,0 +1,29 @@
+/**
+ * Provide ENTITY_TYPE_NAME Snowplow Tracking information
+ * for all events fired by its children
+ */
+export const createENTITY_TYPE_NAME = (
+  data: ENTITY_TYPE_NAME
+) => {
+  return {
+    schema: ENTITY_TYPE_SCHEMA_STRING,
+    data,
+  } as const;
+};
+
+/**
+ * Provide ENTITY_TYPE_NAME Snowplow Tracking information
+ * for all events fired by its children
+ */
+export const TrackingContextENTITY_TYPE_NAME: FunctionComponent<{
+  value:
+    | ENTITY_TYPE_NAME
+    | null
+    | (() => Promise<ENTITY_TYPE_NAME | null> | ENTITY_TYPE_NAME | null);
+}> = ({ value, ...props }) => (
+  <TrackingEntityContext
+    {...props}
+    schema={ENTITY_TYPE_SCHEMA_STRING}
+    data={value}
+  />
+);
